@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+   <link rel="stylesheet" href="estilo.css">
+   <title>A Arte da Cerâmica</title>
+ </head>
+<body>
+
+<header>
+<h2>A Arte da Cerâmica</h2>
+</header>
+
+<nav>
+  <a class="Home" href="index.html" id="linkefeito"> Home </a>
+  <a class="Modelagem" href="mode.html" id="linkefeito"> Modelagem  </a>
+  <a class="Pintura" href="pint.html" id="linkefeito"> Pintura  </a>
+  <a class="Finalização" href="fina.html" id="linkefeito"> Finalização  </a>
+</nav>
+
+
+
+<section>
+  <div class="verniztext">
+    <h3>
+    Após a pintura das peças, é necessário fazer a finalização das mesmas,
+    para isso é mais comumente utilizado o verniz.
+    </h3>
+    </div> 
+
+  <div class="conteudo3">
+    <div class="texto4">
+        <h2>Verniz Brilhante</h2>
+        <p>o Verniz Brilhante protege as peças de cerâmica contra calor, água e sujeiras, além de conservar
+          a pintura e nessa sua versão também dar brilho maravilhoso à peça. </p>
+    </div>
+    <div class="imgverniz">
+        <img src="Design sem nome.png" alt="imgverniz">
+    </div>
+    <div class="texto5">
+        <h2>Verniz Fosco</h2>
+        <p> o Verniz Fosco assim como o brilhante protege as peças de cerâmica contra calor, água e sujeiras, além de conservar  a pintura e nessa sua versão a conserva sem dar brilho a peça, a mantendo fosca.
+        </p>
+    </div>
+</div>
+
+<div class="textpincel">
+<p> 
+  O verniz pode ser passado sobre a peça com um pincel, porém deve ser removido das cerdas
+  logo em sequência, já que é de secagem rapida.
+</p>
+</div>
+</section>
+
+
+
+<aside>
+  <div class="tutoriais">
+    <p> Tutoriais com peças muito fofas
+      para seguir
+    </p>
+  </div>
+ 
+
+  <td><img width="100%" height="15%"  src='jarrasepratos.jpg' class="jarros"/></td>
+<h4>><a href="https://www.youtube.com/watch?v=uXHddDbg2Kg&list=PLU3-uB87Ghh7t0Lhi4t9XX3WhRFGkkdfT&index=1&pp=gAQBiAQB">Tutorial: Jarro e pratinhos decorativos</a></h4>
+
+
+<td><img width="100%" height="15%" src='godeceramica.jpg' class="gode"/></td>
+<h4>><a href="https://www.youtube.com/watch?v=T-Co5ktSrcw&list=PLU3-uB87Ghh7t0Lhi4t9XX3WhRFGkkdfT&index=2&pp=gAQBiAQB">Tutorial: Godê para Aquarelas</a></h4>
+
+
+<td><img width="100%" height="15%" src='floresprensadas.jpg' class="flores"/></td>
+<h4>><a href="https://www.youtube.com/watch?v=Av8DLt129ck&list=PLU3-uB87Ghh7t0Lhi4t9XX3WhRFGkkdfT&index=3&pp=gAQBiAQB">Tutorial: Cerâmica com Flores Prensadas</a></h4>
+</aside>
+
+<button onclick="voltarAoTopo()" id="botaoTopo">Voltar ao Topo</button>
+
+<script>
+function voltarAoTopo() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+}
+
+window.onscroll = function() {
+  const botao = document.getElementById("botaoTopo");
+  if (document.documentElement.scrollTop > 100) {
+    botao.style.display = "block"; 
+  } else {
+    botao.style.display = "none";   
+};
+
+const link = document.getElementById("linkefeito");
+
+ 
+const links = document.querySelectorAll("a");
+
+// Itera por cada link e adiciona os eventos
+links.forEach(link => {
+  // Evento para quando o mouse passa sobre o link
+  link.addEventListener("mouseover", function() {
+    link.style.color = "red";                // Altera a cor do link
+    link.style.textDecoration = "underline"; // Adiciona sublinhado
+  });
+
+  // Evento para quando o mouse sai do link
+  link.addEventListener("mouseout", function() {
+    link.style.color = "blue";               // Retorna à cor original
+    link.style.textDecoration = "none";      // Remove o sublinhado
+  });
+});
+</script>
+
+<footer>
+  Desenvolvedor: <h4>><a href="https://www.instagram.com/n_sei.a?igsh=MTMyeGJ2NG4wajR1dA==">Heloísa Andrade</a></h4>
+</footer>
+
+</body>
+</html>

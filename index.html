@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="estilo.css">
+  <title>A Arte da Cerâmica</title>
+</head>
+
+<body>
+
+
+  <header>
+    <h2>A Arte da Cerâmica</h2>
+  </header>
+
+  <nav>
+    <a class="Home" href="index.html" id="linkefeito"> Home </a>
+    <a class="Modelagem" href="mode.html" id="linkefeito" > Modelagem </a>
+    <a class="Pintura" href="pint.html" id="linkefeito" > Pintura </a>
+    <a class="Finalização" href="fina.html" id="linkefeito"> Finalização </a>
+
+
+  </nav>
+
+  <button onclick="alternarModo()">Alternar Modo</button>
+  <p id="mensagemBoasVindas"></p>
+  <p id="relogio"></p>  
+  <h2 id="mesAno"></h2>
+<div>
+  <h2 id="mesAno"></h2>
+  <div class="navegacao">
+    <button id="prev">❮</button>
+    <button id="next">❯</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Dom</th>
+        <th>Seg</th>
+        <th>Ter</th>
+        <th>Qua</th>
+        <th>Qui</th>
+        <th>Sex</th>
+        <th>Sáb</th>
+      </tr>
+    </thead>
+    <tbody id="calendario-corpo"></tbody>
+  </table>
+</div>
+
+  <script>
+    
+  
+
+  function alternarModo() {
+  document.body.classList.toggle("dark-mode");
+}
+
+// Estilos para o modo escuro
+document.write(`
+  <style>
+    .dark-mode {
+      background-color: #333;
+      color: white;
+    }
+  </style>
+`);
+
+const link = document.getElementById("linkefeito");
+
+const links = document.querySelectorAll("a");
+
+// Itera por cada link e adiciona os eventos
+links.forEach(link => {
+  // Evento para quando o mouse passa sobre o link
+  link.addEventListener("mouseover", function() {
+    link.style.color = "red";                // Altera a cor do link
+    link.style.textDecoration = "underline"; // Adiciona sublinhado
+  });
+
+  // Evento para quando o mouse sai do link
+  link.addEventListener("mouseout", function() {
+    link.style.color = "pink";               // Retorna à cor original
+    link.style.textDecoration = "none";      // Remove o sublinhado
+  });
+});
+  document.addEventListener("DOMContentLoaded", () => {
+    const elementos = document.querySelectorAll(".fade-in");
+    elementos.forEach(elemento => {
+      elemento.classList.add("visible");
+    });
+  });
+
+  
+  const nomeUsuario = prompt("Qual é o seu nome?");
+const horaAtual = new Date().getHours();
+
+let saudacao;
+
+if (horaAtual < 12) {
+  saudacao = "Bom dia";
+} else if (horaAtual < 18) {
+  saudacao = "Boa tarde";
+} else {
+  saudacao = "Boa noite";
+}
+
+if (nomeUsuario) {
+  alert(`${saudacao}, ${nomeUsuario}!`);
+} else {
+  alert(`${saudacao}!`);
+}
+
+function atualizarRelogio() {
+  const agora = new Date();
+  const horas = agora.getHours().toString().padStart(2, '0');
+  const minutos = agora.getMinutes().toString().padStart(2, '0');
+  const segundos = agora.getSeconds().toString().padStart(2, '0');
+  document.getElementById("relogio").innerText = `${horas}:${minutos}:${segundos}`;
+}
+
+setInterval(atualizarRelogio, 1000); // Atualiza a cada segundo
+atualizarRelogio();
+
+const mesAno = document.getElementById("mesAno");
+const calendarioCorpo = document.getElementById("calendario-corpo");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+let dataAtual = new Date();
+
+function gerarCalendario(mes, ano) {
+  // Define o primeiro dia do mês
+  const primeiroDia = new Date(ano, mes, 1).getDay();
+
+  // Define o último dia do mês
+  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+
+  // Limpa o corpo do calendário
+  calendarioCorpo.innerHTML = "";
+
+  // Atualiza o cabeçalho com o mês e o ano
+  const meses = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+  ];
+  mesAno.textContent = `${meses[mes]} ${ano}`;
+
+  // Cria as células do calendário
+  let linha = document.createElement("tr");
+  // Preenche os dias vazios antes do início do mês
+  for (let i = 0; i < primeiroDia; i++) {
+    const celula = document.createElement("td");
+    linha.appendChild(celula);
+  }
+
+  // Preenche os dias do mês
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const celula = document.createElement("td");
+    celula.textContent = dia;
+    linha.appendChild(celula);
+
+    // Se a semana estiver completa, cria uma nova linha
+    if ((primeiroDia + dia) % 7 === 0) {
+      calendarioCorpo.appendChild(linha);
+      linha = document.createElement("tr");
+    }
+  }
+
+  // Adiciona a última linha ao calendário
+  if (linha.children.length > 0) {
+    calendarioCorpo.appendChild(linha);
+  }
+}
+
+// Função para mudar o mês
+function mudarMes(delta) {
+  dataAtual.setMonth(dataAtual.getMonth() + delta);
+  gerarCalendario(dataAtual.getMonth(), dataAtual.getFullYear());
+}
+
+// Botões de navegação
+prevBtn.addEventListener("click", () => mudarMes(-1));
+nextBtn.addEventListener("click", () => mudarMes(1));
+
+// Gera o calendário inicial
+gerarCalendario(dataAtual.getMonth(), dataAtual.getFullYear());
+
+let visitas = localStorage.getItem("visitas") || 0;
+visitas++;
+localStorage.setItem("visitas", visitas);
+alert(`Você visitou este site ${visitas} vez(es).`);
+
+
+
+</script>
+
+  <section>
+    <td><img src="Design sem nome (5).png" alt="" width="125%" height="100%" class="Design"></td>
+    <div class="texto1">
+      <p>A cerâmica fria é uma técnica que permite a criação de peças cerâmicas sem a necessidade da estrutura de um
+        forno. Para criar as peças, é necessário usar uma massa que pode ser modelada à mão e que endurece apenas com a
+        temperatura ambiente, facilitando muito o processo.
+      
+      </p>
+    </div>
+
+    
+  </section>
+
+  <aside>
+    <div class="tutoriais">
+      <p> Tutoriais com peças muito fofas
+        para seguir
+      </p>
+    </div>
+   
+
+    <td><img width="100%" height="15%"  src='jarrasepratos.jpg' class="jarros"/></td>
+<h4>><a href="https://www.youtube.com/watch?v=uXHddDbg2Kg&list=PLU3-uB87Ghh7t0Lhi4t9XX3WhRFGkkdfT&index=1&pp=gAQBiAQB">Tutorial: Jarro e pratinhos decorativos</a></h4>
+
+
+<td><img width="100%" height="15%" src='godeceramica.jpg' class="gode"/></td>
+<h4>><a href="https://www.youtube.com/watch?v=T-Co5ktSrcw&list=PLU3-uB87Ghh7t0Lhi4t9XX3WhRFGkkdfT&index=2&pp=gAQBiAQB">Tutorial: Godê para Aquarelas</a></h4>
+
+
+<td><img width="100%" height="15%" src='floresprensadas.jpg' class="flores"/></td>
+<h4>><a href="https://www.youtube.com/watch?v=Av8DLt129ck&list=PLU3-uB87Ghh7t0Lhi4t9XX3WhRFGkkdfT&index=3&pp=gAQBiAQB">Tutorial: Cerâmica com Flores Prensadas</a></h4>
+  </aside>
+
+  <footer>
+    Desenvolvedor: <h4>><a href="https://www.instagram.com/n_sei.a?igsh=MTMyeGJ2NG4wajR1dA==">Heloísa Andrade</a></h4>
+  </footer>
+
+</body>
+</div>
+</html>
